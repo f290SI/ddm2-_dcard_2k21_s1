@@ -86,4 +86,122 @@ class MyApp extends StatelessWidget {
       ),
 ```
 
+### Step 07 - Adicionando os Widgets
+1. Adicione o `CircleAvatar` como primeiro elemento da `Column`:
+```javascript
+    CircleAvatar(
+      radius: 80,
+      backgroundColor: pinkAccentA200,
+      child: CircleAvatar(
+        radius: 75,
+        backgroundImage: NetworkImage(imageUrl),
+      ),
+    ),
+```
+2. Adicione um espaço vertical com `SizedBox`:
+```javascript
+   SizedBox(
+    height: 24,
+    width: double.infinity,
+  ),
+ ```
+ 3. Adicione o seu nome:
+ ```javascript
+     Text(
+      'Larissa Belloni',
+      style: TextStyle(
+        //Uso de fonte customizada por recurso adicional via pubspec.
+        fontSize: 48, fontFamily: 'Devonshire',
+      ),
+    ),
+ ```
+ 4. Adicione um `Divider` envolto por um `Padding`:
+```javascript
+    Padding(
+      padding: const EdgeInsets.fromLTRB(32, 0, 32, 8),
+      child: Divider(
+        height: 10,
+        color: pinkAccentA200,
+        thickness: 2,
+      ),
+    ),
+```
+5. Adicione o destaque do Cartão de visitas:
+```javascipt
+    Text(
+      'FLUTTER DEVELOPER',
+      style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
+    ),
+    SizedBox(
+      height: 26,
+    ),
+```
+6. Adicione os botões customizados:
+```javascript
+Card(
+              color: pinkAccentA200,
+              margin: EdgeInsets.symmetric(vertical: 10, horizontal: 32),
+              elevation: 8,
+              //Inclusao de WidGet ListTile para estruturar o icone a esquerda e o texto no centro sem utilização de Row()
+              child: ListTile(
+                leading: Icon(FontAwesomeIcons.github),
+                title: Text('Meu Portfólio no GitHub'),
+              ),
+              //Arredondar os cantos do Card
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50),),
+            ),
+            Card(
+              color: linkedInColor,
+              margin: EdgeInsets.symmetric(vertical: 10, horizontal: 32),
+              elevation: 8,
+              child: ListTile(
+                leading: Icon(FontAwesomeIcons.linkedin),
+                title: Text('LinkeIn'),
+              ),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30),),
+            ),
+            TextButton.icon(
+              icon: Icon(FontAwesomeIcons.solidEnvelope),
+              label: Text('larissabelloni@fatec.sp.gov.br'),
+              style: TextButton.styleFrom(primary: Colors.white54,),
+            ),
+          ],
+        ),
+```
+
+### Step 08 - Adicione a interação aos botões
+Vamos utilizar alguns métodos da dependencia `url_laucher` para abrir algumas páginas!
+1. Logo abaixo da declaração das cores, adicione a função abaixo, ela recebera um url como argumento e a abrira em um WebView nativo:
+```javascript
+  Future<void> _launchInWebView(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url, forceWebView: true);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+```
+2. Nos botões customizados que utilizam `Card` com `ListTile`, adicione a propriedade `onTap` dentro do `ListTile`:
+```javascript
+onTap: () {
+  _launchInWebView('url da página que voce deseja abrir');
+},
+```
+3. No `FloatinActionButton`, adicione o `onPressed`:
+```javascript
+onPressed: () {
+  _launchInWebView('https://www.facebook.com/seufacebook');
+},
+```
+
+### Step 09 - Build, Run and Fun
+Confira o seu código com o arquivo main.dart no projeto, caso encontre dificuldade.
+
+
+
+
+
+
+
+
 
